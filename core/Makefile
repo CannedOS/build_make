@@ -1,4 +1,13 @@
 # Put some miscellaneous rules here
+#
+# Build system colors
+#
+# PFX: Prefix "target C++:" in yellow
+# INS: Module "Install:" output color (cyan for ics)
+
+ifneq ($(BUILD_WITH_COLORS),0)
+    include $(TOP_DIR)build/core/colors.mk
+endif
 
 # HACK: clear LOCAL_PATH from including last build target before calling
 # intermedites-dir-for
@@ -4973,9 +4982,29 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(OTA_FROM_TARGET_
 	@echo "Package OTA: $@"
 	$(call build-ota-package-target,$@,-k $(KEY_CERT_PAIR) --output_metadata_path $(INTERNAL_OTA_METADATA))
 
-.PHONY: otapackage
-otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
+TARGET_PACKAGE := $(PRODUCT_OUT)/$(CANNED_VERSION).zip
 
+.PHONY: otapackage canned
+otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
+canned: otapackage
+	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(TARGET_PACKAGE)
+	$(hide) $(MD5SUM) $(TARGET_PACKAGE) > $(TARGET_PACKAGE).md5sum
+	@echo ""
+	@echo -e ${CL_RED}"=============-Package completed successfully-==============="${CL_RED}
+	@echo -e ${CL_YLW}"    ______                                __        ____  _____"${CL_RST}
+	@echo -e ${CL_YLW}"   / ____/____ _ ____   ____   ___   ____/ /       / __ \/ ___/"${CL_RST}
+	@echo -e ${CL_YLW}"  / /    / __ `// __ \ / __ \ / _ \ / __  /______ / / / /\__ \ "${CL_RST}
+	@echo -e ${CL_YLW}" / /___ / /_/ // / / // / / //  __// /_/ //_____// /_/ /___/ / "${CL_RST}
+	@echo -e ${CL_YLW}" \____/ \__,_//_/ /_//_/ /_/ \___/ \__,_/        \____//____/  "${CL_RST}
+	@echo -e ${CL_RED}"============================================================"${CL_RED}
+	@echo -e ${CL_RED}"           		 CannedOS by Vyom Desai    			       "${CL_RED}
+	@echo -e ${CL_YLW}"************************************************************"${CL_RST}   
+	@echo ""
+	@echo -e ${CL_CYN}"════════════════════════════════════════════════════════════"${CL_RST}
+	@echo -e ${CL_BLD}${CL_YLW}"Zip: "${CL_YLW} $(TARGET_PACKAGE)${CL_RST}
+	@echo -e ${CL_BLD}${CL_YLW}"MD5: "${CL_YLW}" `cat $(TARGET_PACKAGE).md5sum | awk '{print $$1}' `"${CL_RST}
+	@echo -e ${CL_BLD}${CL_YLW}"Size: "${CL_YLW}" `du -sh $(TARGET_PACKAGE) | awk '{print $$1}' `"${CL_RST}
+	@echo -e ${CL_CYN}"════════════════════════════════════════════════════════════"${CL_RST}
 ifeq ($(BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE),true)
 name := $(TARGET_PRODUCT)
 ifeq ($(TARGET_BUILD_TYPE),debug)
