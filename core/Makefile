@@ -5070,6 +5070,34 @@ canned: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(TARGET_PACKAGE) > $(TARGET_PACKAGE).md5sum
 	@echo ""
+	@echo ""                                                
+	@echo -e ${CL_CYN}"                                 .*.                              "${CL_CYN}
+	@echo -e ${CL_CYN}"                                .***.                             "${CL_CYN}                     
+	@echo -e ${CL_CYN}"                                *****.                            "${CL_CYN}                     
+	@echo -e ${CL_CYN}"                      ....*************..                         "${CL_CYN}                     
+	@echo -e ${CL_CYN}"                    ..**.... ************.                        "${CL_CYN}                     
+	@echo -e ${CL_CYN}"                   **.     .***************                       "${CL_CYN}                     
+	@echo -e ${CL_CYN}"                  *..**....****************.                      "${CL_CYN}                     
+	@echo -e ${CL_CYN}"                   *......******************                      "${CL_RED}                     
+	@echo -e ${CL_CYN}"                   cxxc***...........***cxxc  					 "${CL_CYN}                     
+	@echo -e ${CL_CYN}"                   cxxxxxxxxxxxxxxxxxxxxxxxc                      "${CL_CYN}
+	@echo -e ${CL_CYN}"                   cxxxxxxxxxxxxxxxxxxxxxxxc                      "${CL_CYN}
+	@echo -e ${CL_CYN}"                   cxxxxxx**.     .*cxxxxxxc                      "${CL_CYN}
+	@echo -e ${CL_CYN}"                   cxxxxc. ..*****.. .cxxxxc  					 "${CL_CYN}
+	@echo -e ${CL_CYN}"                   cxxx*  **********.  cxxxc   					 "${CL_CYN}
+	@echo -e ${CL_CYN}"                   cxxx. .***********. .xxxc 					 "${CL_CYN} 
+	@echo -e ${CL_CYN}"                   cxxx. ************. .xxxc					     "${CL_CYN}
+	@echo -e ${CL_CYN}"                   cxxx* .***********. *xxxc 					 "${CL_CYN}
+	@echo -e ${CL_CYN}"                   cxxxx*  .*******.  *xxxxc 					 "${CL_CYN}
+	@echo -e ${CL_CYN}"                   cxxxxxc*.  ...  .*cxxxxxc                      "${CL_CYN}
+	@echo -e ${CL_CYN}"                 . cxxxxxxxxxc***cxxxxxxxxxc .                    "${CL_CYN}
+	@echo -e ${CL_CYN}"               *o* cxxxxxxxxxxxxxxxxxxxxxxxc *x*                  "${CL_CYN}
+	@echo -e ${CL_CYN}"               xox..*xxxxxxxxxxxxxxxxxxxxx*..xoc                  "${CL_CYN}
+	@echo -e ${CL_CYN}"               .cooc*..***ccxxxxxxxcc***..*coo*.                  "${CL_CYN}
+	@echo -e ${CL_CYN}"                  .*cxxc***.........***cxxc*.                     "${CL_CYN}
+	@echo -e ${CL_CYN}"                       ..*************..              		     "${CL_CYN}          
+	@echo ""
+	@echo ""
 	@echo -e ${CL_RED}"=============-Package completed successfully-==============="${CL_RED}
 	@echo -e ${CL_YLW}"    ______                                __        ____  _____"${CL_RST}
 	@echo -e ${CL_YLW}"   / ____/____ _ ____   ____   ___   ____/ /       / __ \/ ___/"${CL_RST}
@@ -5079,7 +5107,6 @@ canned: otapackage
 	@echo -e ${CL_RED}"============================================================"${CL_RED}
 	@echo -e ${CL_RED}"           Thanks for Compiling : CannedOS Team           "${CL_RED}
 	@echo -e ${CL_YLW}"************************************************************"${CL_RST}   
-	@echo ""
 	@echo -e ${CL_CYN}"════════════════════════════════════════════════════════════"${CL_RST}
 	@echo -e ${CL_BLD}${CL_YLW}"Zip: "${CL_YLW} $(TARGET_PACKAGE)${CL_RST}
 	@echo -e ${CL_BLD}${CL_YLW}"MD5: "${CL_YLW}" `cat $(TARGET_PACKAGE).md5sum | awk '{print $$1}' `"${CL_RST}
